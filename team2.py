@@ -8,6 +8,7 @@
 ####
 
 team_name = 'Логан и Макс' # Only 10 chars displayed.
+#Logan and Max
 strategy_name = 'The name the team gives to this strategy'
 strategy_description = 'How does this strategy decide?'
     
