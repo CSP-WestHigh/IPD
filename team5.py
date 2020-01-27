@@ -29,32 +29,32 @@ def move(my_history, their_history, my_score, their_score):
     LOOKBACK_DEPTH = 5   # Number of opponent moves to look back at
     FIRST_MOVE = 'c'
     
-    tB = 0
-    tC = 0
+    tB = 0  # Number of BETRAYS in the LOOKBACK period
+    tC = 0  # Number of COLLUDES in the LOOKBACK period
     
-    numMoves = len(their_history)
+    numMoves = len(their_history) # Number of moves in the game so far
     
-    if numMoves == 0:
+    if numMoves == 0:   # This is our first move
         ourMove = FIRST_MOVE
     else:
-        if numMoves < LOOKBACK_DEPTH:
+        if numMoves < LOOKBACK_DEPTH:   
             tH = their_history[-numMoves:]
         else:
             tH = their_history[-LOOKBACK_DEPTH:]
             
-        for move in tH:
+        for move in tH:   # tH is the list of their moves in the LOOKBACK period
             if move == 'b':
                 tB += 1
             else:                
                 tC += 1
     
-        if tB != 0:    
-           if (tC/tB) > 1 and move == 'c':
+        if tB != 0:    #  if they BETRAYED during the LOOKBACK period
+           if (tC/tB) > 1 and move == 'c':  # if they COLLUDED more than they BETRAYED, we COLLUDE
                 ourMove = 'c'
            else:
-                ourMove = 'b'
+                ourMove = 'b'  # if they BETRAYED more than they COLLUDED, we BETRAY
         else:
-            ourMove = FIRST_MOVE
+            ourMove = FIRST_MOVE  # if they have NOT BETRAYED in the LOOKBACK period, we use our FIRST_MOVE
                 
     return ourMove
     
