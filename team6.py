@@ -29,6 +29,7 @@ def move(my_history, their_history, my_score, their_score):
         return 'c'
     else:
         #betray for the rest of the play if the others betray two times in a row
+        if 'bb' in their_history:
             return 'b'
         else:
             #return the previous move of the other team
