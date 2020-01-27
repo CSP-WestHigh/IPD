@@ -24,10 +24,16 @@ def move(my_history, their_history, my_score, their_score):
     # The first round between these two players is my_history[0] and their_history[0].
     # The most recent round is my_history[-1] and their_history[-1].
     
-    # Analyze my_history and their_history and/or my_score and their_score.
-    # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
+    #collude in the first round    
+    if len(my_history, their_history, my_score, their_score)==0:
+        return 'c'
+    else:
+        #betray for the rest of the play if the others betray two times in a row
+            return 'b'
+        else:
+            #return the previous move of the other team
+            previous_move= their_history[-1]
+            return previous_move
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
