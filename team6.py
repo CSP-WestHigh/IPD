@@ -25,7 +25,7 @@ def move(my_history, their_history, my_score, their_score):
     # The most recent round is my_history[-1] and their_history[-1].
     
     #collude in the first round    
-    if len(my_history, their_history, my_score, their_score)==0:
+    if len(my_history)==0:
         return 'c'
     else:
         #betray for the rest of the play if the others betray two times in a row
