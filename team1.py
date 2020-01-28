@@ -6,9 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+team_name = 'Team Umizoomi' # Only 10 chars displayed.
+strategy_name = 'Mimicker'
+strategy_description = 'Cooperates on the first move, and then does whatever the its opponent has done on the previous move'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -17,6 +17,12 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
+    if len(my_history) == 0:
+        return 'c'
+    elif their_history[-1] == 'b':
+        return 'b'
+    else:
+        return 'c'
 
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
