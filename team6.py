@@ -6,10 +6,10 @@
 #     move: A function that returns 'c' or 'b'
 #### 
 
-team_name = 'Jasper and Ana Maria' # Only 17 chars displayed.
+team_name = 'Jasper & AM' # Only 10 chars displayed.
 #### Jasper and Ana Maria
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'Copycat until treason'
+strategy_description = 'Collude in the first round. Then, play what the opponent played on the previous move unless they betray 2 times in a row. If that happens, we betray for the rest of the tournament.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
