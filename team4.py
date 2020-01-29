@@ -11,6 +11,10 @@ strategy_name = 'Win'
 strategy_description = 'We make the correct choices.'
     
 def move(my_history, their_history, my_score, their_score):
+    if len(my_history)==0:
+        return "c"
+    elif:
+        return their_history [-1]
     ''' Arguments accepted: my_history, their_history are strings.
     my_score, their_score are ints.
     
@@ -28,7 +32,7 @@ def move(my_history, their_history, my_score, their_score):
     
     return 'c'
 
-    
+
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
