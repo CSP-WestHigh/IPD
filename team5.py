@@ -6,9 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+team_name = 'Old D00ds' # Only 10 chars displayed.
+strategy_name = 'Recent Trend'
+strategy_description = 'Look for trend in last N moves of opponent'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -26,7 +26,38 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    LOOKBACK_DEPTH = 5   # Number of opponent moves to look back at
+    FIRST_MOVE = 'c'
+    
+    tB = 0  # Number of BETRAYS in the LOOKBACK period
+    tC = 0  # Number of COLLUDES in the LOOKBACK period
+    
+    numMoves = len(their_history) # Number of moves in the game so far
+    
+    if numMoves == 0:   # This is our first move
+        ourMove = FIRST_MOVE
+    else:
+        if numMoves < LOOKBACK_DEPTH:   
+            tH = their_history[-numMoves:]
+        else:
+            tH = their_history[-LOOKBACK_DEPTH:]
+            
+        for move in tH:   # tH is the list of their moves in the LOOKBACK period
+            if move == 'b':
+                tB += 1
+            else:                
+                tC += 1
+    
+        if tB != 0:    #  if they BETRAYED during the LOOKBACK period
+           if (tC/tB) > 1 and move == 'c':  # if they COLLUDED more than they BETRAYED, we COLLUDE
+                ourMove = 'c'
+           else:
+                ourMove = 'b'  # if they BETRAYED more than they COLLUDED, we BETRAY
+        else:
+            ourMove = FIRST_MOVE  # if they have NOT BETRAYED in the LOOKBACK period, we use our FIRST_MOVE
+                
+    return ourMove
+    
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
@@ -52,11 +83,11 @@ if __name__ == '__main__':
               their_history='', 
               my_score=0,
               their_score=0,
-              result='b'):
+              result='c'):
          print 'Test passed'
      # Test 2: Continue betraying if they collude despite being betrayed.
-    test_move(my_history='bbb',
-              their_history='ccc', 
+    test_move(my_history='cccc',
+              their_history='cccc', 
               # Note the scores are for testing move().
               # The history and scores don't need to match unless
               # that is relevant to the test of move(). Here,
@@ -65,4 +96,4 @@ if __name__ == '__main__':
               # move('bbb', 'ccc', 0, 0) returns 'b'.
               my_score=0, 
               their_score=0,
-              result='b')             
+              result='c')             
