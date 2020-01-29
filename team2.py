@@ -28,7 +28,11 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    z = random.sample([1,2,3,4,5,6,7,8,9,10],1)
+    if z < 5:
+        return 'b'
+    else:
+        return 'c'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
