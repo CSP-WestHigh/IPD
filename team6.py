@@ -6,10 +6,10 @@
 #     move: A function that returns 'c' or 'b'
 #### 
 
-team_name = 'Jasper and Ana Maria' # Only 17 chars displayed.
+team_name = 'Jasper & AM' # Only 10 chars displayed.
 #### Jasper and Ana Maria
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+strategy_name = 'Copycat until treason'
+strategy_description = 'Collude in the first round. Then, play what the opponent played on the previous move unless they betray 2 times in a row. If that happens, we betray for the rest of the tournament.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -24,10 +24,17 @@ def move(my_history, their_history, my_score, their_score):
     # The first round between these two players is my_history[0] and their_history[0].
     # The most recent round is my_history[-1] and their_history[-1].
     
-    # Analyze my_history and their_history and/or my_score and their_score.
-    # Decide whether to return 'c' or 'b'.
-    
-    return 'c'
+    #collude in the first round    
+    if len(my_history)==0:
+        return 'c'
+    else:
+        #betray for the rest of the play if the others betray two times in a row
+        if 'bb' in their_history:
+            return 'b'
+        else:
+            #return the previous move of the other team
+            previous_move= their_history[-1]
+            return previous_move
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
